@@ -37,6 +37,8 @@ namespace API
 
             app.UseRouting();
 
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
             app.UseCors(x => x.AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials()
@@ -47,7 +49,7 @@ namespace API
             app.UseAuthorization();
 
             app.UseDefaultFiles();
-            app.UseStaticFiles();
+            app.UseStaticFiles();            
 
             app.UseEndpoints(endpoints =>
             {
