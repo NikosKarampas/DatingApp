@@ -14,7 +14,6 @@ namespace API.Services
             var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
             var acc = new Account();
-
             if ( env == "Development")
             {
                 acc.Cloud = config.Value.CloudName;
