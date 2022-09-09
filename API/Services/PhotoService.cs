@@ -11,12 +11,22 @@ namespace API.Services
         private readonly Cloudinary _cloudinary; 
         public PhotoService(IOptions<CloudinarySettings> config)
         {
-            var acc = new Account
-            (
-                config.Value.CloudName, 
-                config.Value.ApiKey,
-                config.Value.ApiSecret
-            );
+            var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
+            var acc = new Account();
+
+            if ( env == "Development")
+            {
+                acc.Cloud = config.Value.CloudName;
+                acc.ApiKey = config.Value.ApiKey;
+                acc.ApiSecret = config.Value.ApiSecret;
+            }
+            else
+            {
+                acc.Cloud = Environment.GetEnvironmentVariable("Cloudinary:CloudName");
+                acc.ApiKey= Environment.GetEnvironmentVariable("Cloudinary:ApiKey");
+                acc.ApiSecret = Environment.GetEnvironmentVariable("Cloudinary:ApiSecret");
+            }
 
             _cloudinary = new Cloudinary(acc);
         }
