@@ -14,18 +14,22 @@ namespace API.Services
             var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
             var acc = new Account();
-            if ( env == "Development")
-            {
-                acc.Cloud = config.Value.CloudName;
-                acc.ApiKey = config.Value.ApiKey;
-                acc.ApiSecret = config.Value.ApiSecret;
-            }
-            else
-            {
-                acc.Cloud = Environment.GetEnvironmentVariable("Cloudinary:CloudName");
-                acc.ApiKey= Environment.GetEnvironmentVariable("Cloudinary:ApiKey");
-                acc.ApiSecret = Environment.GetEnvironmentVariable("Cloudinary:ApiSecret");
-            }
+            acc.Cloud = config.Value.CloudName;
+            acc.ApiKey = config.Value.ApiKey;
+            acc.ApiSecret = config.Value.ApiSecret;
+
+            // if ( env == "Development")
+            // {
+            //     acc.Cloud = config.Value.CloudName;
+            //     acc.ApiKey = config.Value.ApiKey;
+            //     acc.ApiSecret = config.Value.ApiSecret;
+            // }
+            // else
+            // {
+            //     acc.Cloud = Environment.GetEnvironmentVariable("Cloudinary:CloudName");
+            //     acc.ApiKey= Environment.GetEnvironmentVariable("Cloudinary:ApiKey");
+            //     acc.ApiSecret = Environment.GetEnvironmentVariable("Cloudinary:ApiSecret");
+            // }
 
             _cloudinary = new Cloudinary(acc);
         }
